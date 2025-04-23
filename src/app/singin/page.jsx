@@ -2,11 +2,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { singinuser } from "../action/auth/singinUser";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+
 
 const Singuppage = () => {
     const [imgPreview, setImgPreview] = useState(null);
     const [imgFile, setImgFile] = useState(null);
-
+         const router = useRouter()
     const Img_key = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
     const image_hosting = `https://api.imgbb.com/1/upload?key=${Img_key}`;
 
@@ -26,8 +29,7 @@ const Singuppage = () => {
 
         if (imgFile) {
             const formData = new FormData();
-            formData.append("image", imgFile);
-
+            formData.append("image", imgFile); 
             try {
                 const res = await fetch(image_hosting, {
                     method: "POST",
@@ -36,17 +38,26 @@ const Singuppage = () => {
 
                 const data = await res.json();
                 imageUrl = data?.data?.url;
+
+                e.target.reset();
+                singinuser({name, email, password, imageUrl})
+                toast.success("logged in successfully")
+                router.push("/")
             } catch (error) {
                 console.error("Image upload failed:", error);
+                toast.error("Signup failed. Please try again.");
             }
+
+        
         }
+        
+               
+            
+       
+       
 
-        const userData = {name, email, password, imageUrl };
-        console.log("Final Signup Data:", userData);
-        singinuser({name, email, password, imageUrl})
-
-        // 🔄 Send userData to your backend here if needed
-    };
+       
+    }
 
     return (
         <div className='border my-16 border-gray-500 p-3 w-full rounded-2xl max-w-lg mx-auto flex flex-col items-center justify-center'>

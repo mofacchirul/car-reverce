@@ -2,19 +2,32 @@
 import Link from 'next/link';
 
 import React from 'react';
+import { singinuser } from '../action/auth/singinUser';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
   
     const Handlelogin = async (e) => {
+        const router = useRouter()
         e.preventDefault(); 
         const email = e.target.email.value;
         const password = e.target.password.value; 
-        const user = { email, password };
-        console.log(user);
-    
-    
-    
-    
+
+        try{
+            await singinuser("credentials",{email,password})
+            router.push("/")
+            toast.success("logged in successfully!",{
+                position: "top-right"
+              })
+        }
+        catch(err){
+   
+            toast.error("Error Notification !", {
+                position: "top-center",
+              });
+            e.target.reset()
+         }
+   
     
     }
 
