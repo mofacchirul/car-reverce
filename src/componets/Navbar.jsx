@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
-
+import { useSession } from "next-auth/react"
 const Navbar = () => {
+  const seccion = useSession()
+  console.log(seccion);
+  
     const links = (
         <div className='flex gap-3 font-bold'>
             <li><Link href="/">Home</Link></li>
