@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { singinuser } from '../action/auth/singinUser';
 import { useRouter } from 'next/navigation';
+import Social from '../social/social';
 
 const Login = () => {
   
@@ -66,9 +67,7 @@ const Login = () => {
                     Sign In
                 </button>
                        
-                       {/* <Socal>
-                        
-                       </Socal> */}
+                      <Social></Social>
 
                
             </form>

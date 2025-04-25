@@ -4,6 +4,7 @@ import Link from "next/link";
 import { singinuser } from "../action/auth/singinUser";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Social from "../social/social";
 
 
 const Singuppage = () => {
@@ -88,6 +89,7 @@ const Singuppage = () => {
                 <button type="submit" className="w-full h-12 mt-6 bg-yellow-500 rounded-3xl text-black font-bold">
                     Sign Up
                 </button>
+                <Social></Social>
             </form>
             <div className="mt-4 text-center">
                 <p>Or Sign In with</p>
