@@ -16,17 +16,7 @@ const Social = () => {
           router.push("/")
       }
       },[session?.status])
-      // if(result.ok){
-      //   toast.success(`logged in successfully!${provider}`,{
-      //       position: "top-right"
-      //     })
-      //     router.push("/")
-      // }
-      // else{
-      //   toast.error("Error Notification !", {
-      //       position: "top-center",
-      //     });
-      // }
+
         
     }
 

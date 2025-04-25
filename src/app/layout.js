@@ -3,7 +3,9 @@ import "./globals.css";
 import Navbar from "@/componets/Navbar";
 import Footer from "@/componets/Footer";
 import { ToastContainer } from "react-toastify";
-import NextAuth from "@/Providers/NextAuth";
+import Nextprovider from "@/Providers/NextAuth";
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,12 +28,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextAuth>
+        <Nextprovider>
         <Navbar></Navbar>
         <ToastContainer></ToastContainer>
         {children}
         <Footer></Footer>
-        </NextAuth>
+        </Nextprovider>
       </body>
     </html>
   );

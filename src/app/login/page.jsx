@@ -15,7 +15,7 @@ const Login = () => {
         const password = e.target.password.value; 
 
         try{
-            await singinuser("credentials",{email,password})
+            await singinuser("credentials",{email,password,redirect: false})
             router.push("/")
             toast.success("logged in successfully!",{
                 position: "top-right"

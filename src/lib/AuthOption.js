@@ -2,6 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 import { singinuser } from "@/app/action/auth/singinUser"
+import bdconnect, { CollectionObjName } from "./bdConnect";
 export const authOptions = {
     providers: [
         CredentialsProvider({
@@ -47,5 +48,25 @@ export const authOptions = {
       pages: {
           signIn: '/login', 
         },
+
+        callbacks: {
+          async signIn({ user, account, profile, email, credentials }) {
+            console.log({ user, account, profile, email, credentials });
+            if(account){
+              const { providerAccountId, provider } = account
+              const { email: user_email, image, name } = user
+              const usercollection = bdconnect(CollectionObjName.usecollection);
+              const userExist = await usercollection.findOne({providerAccountId})
+              console.log(userExist);
+              
+              if(!userExist){
+                const payload= {providerAccountId, provider,email:user_email, imageUrl, name}
+                await usercollection.insertOne(payload)
+              }
+            }
+            return true
+          },
+        
+        }
 
 }

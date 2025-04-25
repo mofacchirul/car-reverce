@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 const Navbar = () => {
   const { data: session, status } = useSession();
-  console.log(session,status);
+
   
     const links = (
         <div className='flex gap-1 '>

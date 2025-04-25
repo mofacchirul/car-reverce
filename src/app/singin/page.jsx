@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import Link from "next/link";
 import { singinuser } from "../action/auth/singinUser";
 import { toast } from "react-toastify";
@@ -31,6 +31,7 @@ const Singuppage = () => {
         if (imgFile) {
             const formData = new FormData();
             formData.append("image", imgFile); 
+
             try {
                 const res = await fetch(image_hosting, {
                     method: "POST",
@@ -41,13 +42,18 @@ const Singuppage = () => {
                 imageUrl = data?.data?.url;
 
                 e.target.reset();
-                singinuser({name, email, password, imageUrl})
+                setImgFile(null);
+setImgPreview(null);
+              await  singinuser({name, email, password, imageUrl})
                 toast.success("logged in successfully")
                 router.push("/")
             } catch (error) {
                 console.error("Image upload failed:", error);
                 toast.error("Signup failed. Please try again.");
             }
+            
+           
+
 
         
         }
